@@ -315,7 +315,8 @@ watch는 Vue에서 특정 데이터의 변화를 감시하는 속성이다.<br/>
 
 ## V-Show
 조건에 따라 요소의 표시를 제어한다.<br/>
-조건이 true일 경우 요소는 DOM에 나타내고, 조건이 false일 경우 "display: none" 스타일이 적용되어 요소가 숨겨지지만 DOM에는 여전히 존재한다.
+조건이 true일 경우 요소는 DOM에 나타내고,<br/> 
+조건이 false일 경우 "display: none" 스타일이 적용되어 요소가 숨겨지지만 DOM에는 여전히 존재한다.
 
 ```java
 <!DOCTYPE html>
@@ -590,22 +591,42 @@ export default {
 </script>
 ```
 
+## Ref
+Vue에서 특정 DOM 엘리먼트나 컴포넌트 인스턴스에 직접적인 참조를 생성하는 데 사용되는 속성이다.<br/> 
+이를 통해 특정 엘리먼트나 컴포넌트에 프로그래밍적으로 접근할 수 있게 된다.
+
 ```java
+<-- DOM 엘리먼트에 ref 사용 -->
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <input ref="myInput">
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: {
-      //props의 타입,필수여부,기본텍스트 설정
-      type:String,
-      required:false,
-      default: 'default title'
-    }
+  mounted() {
+    // this.$refs.myInput를 통해 input 엘리먼트에 직접 접근 가능
+    this.$refs.myInput.focus();
+  }
+}
+</script>
+```
+
+```java
+<-- 자식 컴포넌트 인스턴스에 ref 사용 -->
+<template>
+  <child-component ref="myChild"></child-component>
+</template>
+
+<script>
+import ChildComponent from './ChildComponent.vue';
+
+export default {
+  components: {
+    ChildComponent
+  },
+  mounted() {
+    // this.$refs.myChild를 통해 ChildComponent 인스턴스에 접근 가능
+    this.$refs.myChild.someMethod();
   }
 }
 </script>
