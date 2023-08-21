@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue2 baisc</title>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .font-bold {
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- v-if: 조건에 따라 태그가 랜더링됨 -->
+        <template v-if="number === 1">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </template>
+        <div v-else-if="number === 2">Hi</div>
+        <div v-else>No</div>
+
+        
+        <!-- v-show:  data값에 따라(true,false)에 따라 랜더링-->
+        <!-- 차이점은 v-show가 있는 엘리먼트는 항상 렌더링 되고 DOM에 남아있음 . 
+        v-show는 단순히 엘리먼트에 display CSS 속성을 토글한다.
+        데이터가 자주바뀌면 v-show, 런타임시 잘 바뀌지 않으면 v-if사용이 권장됨 -->
+        <div v-show="show">Yes</div>
+        <br>
+        <button @click="toggle">Toggle</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                number: 1,
+                show: false
+            },
+            methods: {
+                increaseNumber() {
+                    this.number++;
+                },
+                toggle() {
+                    this.show = !this.show;
+                }
+            },
+        })
+    </script>
+</body>
+</html>

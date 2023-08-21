@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue2 basic</title>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .font-bold {
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- //폼 새로고침 이벤트 막기 -->
+        <form v-on:submit.prevent="submit">
+            <!-- 데이터 양방향 바인딩:v-model -->
+            <!-- <input type="text" :value="text" @keyup="updateText"><br> -->
+            <input type="text" v-model="text"><br>
+            {{ text }}<br>
+            <button type="submit">Submit</button>
+        </form>
+
+
+        <!-- computed된 값 -->
+        <button @click="changeMessage">Clcik</button>
+        {{ reversedMessage }}
+        {{ reversedMessage }}
+
+
+        <!-- watch 테스트 -->
+        <button @click="changeMessage">Click</button><br>
+        {{ message }}
+        {{ updated }}
+
+
+        <!-- 클래스,스타일 바인딩  -->
+        <!-- v-bind:class === :class -->
+        <div :style="{ color: red, fontSize: size}">Hello</div>
+        <div :class="{ red: isRed, 'font-bold': isBold}">Hello</div>
+        <button @click="updateStyle">updateStyle</button>
+
+
+        <!-- v-if: 조건에 따라 태그가 랜더링됨 -->
+        <template v-if="number === 1">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </template>
+        <div v-else-if="number === 2">Hi</div>
+        <div v-else>No</div>
+
+
+        <!-- v-show:  data값에 따라(true,false)에 따라 랜더링-->
+        <!-- 차이점은 v-show가 있는 엘리먼트는 항상 렌더링 되고 DOM에 남아있다는 점입니다. 
+        v-show는 단순히 엘리먼트에 display CSS 속성을 토글합니다.
+        데이터가 자주바뀌면 v-show, 런타임시 잘 바뀌지 않으면 v-if사용이 권장됨 -->
+        <div v-show="show">show</div>
+        <button @click="controlShow">controlShow</button>
+
+
+        <!-- v-for:반복문 -->
+        <!-- Vue에서 개별 DOM 노드들을 추적하고 기존 엘리먼트를 재사용, 재정렬하기 위해서 v-for의 각 항목들에 고유한 key 속성을 
+        제공해야 합니다. key에 대한 이상적인 값은 각 항목을 식별할 수 있는 고유한 ID입니다.  -->
+        <div v-for="(person, index) in people" :key="person.id">
+            {{ person.name }} {{ person.age }} {{ index }}
+        </div>
+        <!-- 객체 사용시 -->
+        <div v-for="(value, name, index) in object">
+            {{ index }}. {{ name }}: {{ value }}
+        </div>
+
+
+        {{ name }}<br>
+        <button @click="changeText">Click</button>
+    </div>
+
+    <!-- 여러개의 뷰 인스턴스 생성 -->
+    <div id="app-1">
+        {{ name }}<br>
+        <button @click="changeText">Click</button>
+    </div>
+
+    <script>
+        Vue.component('hello-world', {
+            template: '<div>hello world</div>'
+        });
+        Vue.component('kossie-button', {
+            template: `
+             <div>
+                 {{ name }}<br>
+                 <hello-world></hello-world>
+                 <button @click="changeText">Click</button>
+             </div>
+             `,
+            data() {
+                return {
+                    name: 'kossie'
+                }
+            },
+            methods: {
+                changeText() {
+                    this.name = 'kossie updated';
+                }
+            },
+        });
+
+        const HelloWorld = {
+            template: '<div>hello world</div>'
+        };
+
+        const KossieButton = {
+            components: {
+                'hello-world': HelloWorld
+            },
+            template: `
+            <div>
+                {{ name }}<br>
+                <hello-world></hello-world>
+                <button @click="changeText">Click</button>
+            </div>
+            `,
+            data() {
+                return {
+                    name: 'kossie'
+                }
+            },
+            methods: {
+                changeText() {
+                    this.name = 'kossie updated';
+                }
+            },
+        };
+
+        const app = new Vue({
+            el: '#app',
+            components: {
+                'kossie-button': KossieButton
+            },
+            data: {
+                year: 2023,
+                text: 'text',
+                message: 'msg',
+                updated: 'updated',
+                isRed: false,
+                isBold: false,
+                red: 'red',
+                size: '30px',
+                number: 1,
+                show: false,
+                people: [
+                    { id: 1, name: 'a', age: 20 },
+                    { id: 2, name: 'b', age: 21 },
+                    { id: 3, name: 'c', age: 22 },
+                    { id: 4, name: 'd', age: 23 },
+                    { id: 5, name: 'e', age: 24 },
+                    { id: 6, name: 'e', age: 25 },
+                ],
+                name: 'kossie'
+            },
+            methods: {
+                plus() {
+                    this.year++;
+                },
+                minus() {
+                    this.year--;
+                },
+                submit() {
+                    alert('submitted');
+                    console.log('hello');
+                },
+                // updateText(event) {
+                //     this.text = event.target.value;
+                // }
+                changeMessage() {
+                    this.message = 'msg변경';
+                },
+                updateStyle() {
+                    this.isRed = !this.isRed;
+                    this.isBold = !this.isBold;
+                },
+
+                increaseNumber() {
+                    this.number++;
+                },
+                controlShow() {
+                    this.show = !this.show;
+                },
+                //다른 인스턴스의 data를 바꾸고싶을떄 변수화한담에 바꿔주면됨 (this->app1)
+                changeText() {
+                    app1.name = 'kossie updated';
+                }
+            },
+            //템플릿 내 간단한 연산을 넣는것은 괜찮지만 복잡한 연산을 넣는것은 코드가 비대해지고 유지보수가 어려움
+            //이떄 사용되는것이 computed 속성 , 만약 methods로 사용하고싶으면 ()괄호만 넣어주면 됨
+            //차이점: computed 속성은 캐싱됨 // 매번 계산하는것이 아니라 한번계산후 재사용함 (메세지가 바뀌면 다시 계산함)
+            computed: {
+                reversedMessage() {
+                    return this.message.split('').reverse().join('')
+                }
+            },
+
+            // 대부분의 경우 computed 속성이 더 적합하지만 사용자가 만든 감시자가 필요한 경우가 있습니다. 
+            // 그래서 Vue는 watch 옵션을 통해 데이터 변경에 반응하는 보다 일반적인 방법을 제공합니다. 
+            // 이는 데이터 변경에 대한 응답으로 비동기식 또는 시간이 많이 소요되는 조작을 수행하려는 경우에 가장 유용합니다.
+
+            watch: {
+                //message라는 데이터를 감시 //message가 변경이 되면 실행됨
+                message(newVal, oldVal) {
+                    console.log(newVal, oldVal);
+                    this.updated = 'updated변경';
+                }
+            }
+        })
+
+        // 여러개의 뷰 인스턴스 생성
+        const app1 = new Vue({
+            el: '#app-1',
+            components: {
+                'kossie-button': KossieButton
+            },
+            data: {
+                name: 'kossie1'
+            },
+            methods: {
+                changeText() {
+                    app.name = 'kossie1 updated';
+                }
+            },
+        })
+
+
+    </script>
+</body>
+
+</html>

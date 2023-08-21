@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue2 basic</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="changeMessage">Clcik</button>
+        {{ reversedMessage }}
+        {{ reversedMessage }}
+        {{ reversedMessage }}
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+               message: 'msg'
+            },
+            methods: {
+                changeMessage() {
+                    this.message = 'msgChanged';
+                }
+            },
+            //템플릿 내 간단한 연산을 넣는것은 괜찮지만 복잡한 연산을 넣는것은 코드가 비대해지고 유지보수가 어려움
+            //이떄 사용되는것이 computed 속성 , 만약 methods로 사용하고싶으면 ()괄호만 넣어주면 됨
+            //차이점: computed 속성은 캐싱되며
+            //매번 계산하는것이 아니라 한번계산후 재사용함 (메세지가 바뀌면 다시 계산하고 랜덩링됨)
+            computed: {
+                reversedMessage() {
+                    return this.message.split('').reverse().join('')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

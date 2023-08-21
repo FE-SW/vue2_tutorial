@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue2 baisc</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- {{ name }}<br>
+       <button @click="changeText">Click</button>
+        -->
+        <custom-button></custom-button>
+    </div>
+
+    
+    <div id="app-1">
+        <!-- {{ name }}<br>
+       <button @click="changeText">Click</button>
+        -->
+        <!-- app-1 인스턴스에 컴포넌트 등록을 안했으니 화면에 나타나지않음 -->
+        <custom-button></custom-button>
+    </div>
+    <script>
+
+        // 전역컴포넌트 (어떤 뷰인스턴스든지 사용할 수 있음)
+        // Vue.component('hello-world', {
+        //     template: '<div>hello world</div>'
+        // });
+        // Vue.component('custom-button', {
+        //     template: `
+        //     <div>
+        //         {{ name }}<br>
+        //         <hello-world></hello-world>
+        //         <button @click="changeText">Click</button>
+        //     </div>
+        //     `,
+        //  데이터는 객체로 넘길시 레퍼런스로 넘기기떄문에 함수로 변경해줌
+        //     data() {
+        //         return {
+        //             name: 'name'
+        //         }
+        //     },
+        //     methods: {
+        //         changeText() {
+        //             this.name = 'name updated';
+        //         }
+        //     },
+        // });
+
+        //지역컴포넌트
+        const HelloWorld = {
+            template: '<div>hello world</div>'
+        };
+
+        const CustomButton = {
+            components: {
+                'hello-world': HelloWorld
+            },
+            template: `
+            <div>
+                {{ name }}<br>
+                <hello-world></hello-world>
+                <button @click="changeText">Click</button>
+            </div>
+            `,
+            data() {
+                return {
+                    name: 'name'
+                }
+            },
+            methods: {
+                changeText() {
+                    this.name = 'name updated';
+                }
+            },
+        };
+
+        const app = new Vue({
+            el: '#app',
+            components: {
+                'custom-button': CustomButton
+            }
+            // data: {
+            //     name: 'name'
+            // },
+            // methods: {
+            //     changeText() {
+            //         this.name = 'name updated';
+            //     }
+            // },
+        })
+
+        const app1 = new Vue({
+            el: '#app-1',
+            // components: {
+            //     'custom-button': CustomButton
+            // }
+            // data: {
+            //     name: 'name'
+            // },
+            // methods: {
+            //     changeText() {
+            //         this.name = 'name updated';
+            //     }
+            // },
+        })
+    </script>
+</body>
+
+</html>

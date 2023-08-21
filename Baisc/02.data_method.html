@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue2 basic</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 중괄호 두개 -->
+        {{ nextYear('안녕') }}
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                person: {
+                    name: 'name',
+                    age: 20
+                }
+            },
+            methods: {
+                nextYear(greeting) {
+                    return greeting + '! ' +this.person.name + ' 는 내년에 ' + (this.person.age + 1) + '살 입니다';
+                },
+                otherMethod: function() {
+                    this.nextYear();
+                }
+            }
+        })
+    </script>
+</body>
+</html>
