@@ -1187,7 +1187,7 @@ helper의 종료 4가지로 나뉘는데,
 * 저장소의 actions를 컴포넌트의 methods로 매핑한다.
 
 4. mapGetters:
-*  저장소의 getters를 컴포넌트의 computed 속성으로 매핑한.
+*  저장소의 getters를 컴포넌트의 computed 속성으로 매핑한다.
 
 ```java
 <!-- 예시 1번 -->
