@@ -32,7 +32,7 @@ Vue 인스턴스는 Vue.js에서 생성된 객체이다.<br/>
 </html>
 ```
 
-## methods
+## Methods
 methods 속성을 통해 인스턴스에 함수를 추가할 수 있다.<br/> 
 이 메소드들은 인스턴스의 다른 속성과 상호 작용하거나, html 태그의 이벤트 리스너로 사용될 수 있다
 
@@ -74,7 +74,7 @@ methods 속성을 통해 인스턴스에 함수를 추가할 수 있다.<br/>
 </html>
 ```
 
-## v-bind
+## V-Bind
 v-bind는 Vue의 디렉티브 중 하나로, HTML 속성을 Vue 인스턴스의 데이터와 바인딩하기 위해 사용된다.<br/> 
 이를 통해 동적으로 HTML 요소의 속성값을 지정할 수 있다
 
@@ -114,7 +114,7 @@ v-bind는 Vue의 디렉티브 중 하나로, HTML 속성을 Vue 인스턴스의 
 </html>
 ```
 
-## v-model
+## V-Model
 v-model는 Vue의 양방향 데이터 바인딩 디렉티브이다.<br/> 
 주로 입력 양식 요소에 사용되며, 사용자의 입력과 Vue 인스턴스의 데이터를 자동으로 서로 연결하고 동기화한다.<br/> 
 즉, 사용자의 입력으로 값이 변경되면 Vue 인스턴스의 데이터도 자동으로 업데이트되고, 반대로 데이터의 변경이 입력 필드에도 반영된다.
@@ -160,7 +160,7 @@ v-model는 Vue의 양방향 데이터 바인딩 디렉티브이다.<br/>
 </html>
 ```
 
-## computed
+## Computed
 computed는 Vue의 반응형 연산 속성이다.<br> 
 기본 데이터를 기반으로 어떤 계산된 결과를 반환하며, 의존하는 상태가 변경될 때만 재계산된다.<br> 
 이를 통해 효율적으로 상태 변화에 따른 연산을 처리하고, 그 결과를 캐시하여 성능을 최적화할 수 있다.
@@ -207,7 +207,7 @@ computed는 Vue의 반응형 연산 속성이다.<br>
 </html>
 ```
 
-## watched
+## Watched
 watch는 Vue에서 특정 데이터의 변화를 감시하는 속성다.<br/>
 데이터의 변화를 감지할 때마다 정의된 함수가 호출되어 복잡한 연산, 비동기 요청 또는 수행이 필요한 다른 작업들을 수행할 수 있다.
 
@@ -262,7 +262,7 @@ watch는 Vue에서 특정 데이터의 변화를 감시하는 속성다.<br/>
 </html>
 ```
 
-## v-if
+## V-If
 조건에 따라 요소를 렌더링 해주는 기능을 제공한다. 
 조건이 true일 경우 요소는 DOM에 나타내고, 조건이 false일 경우 해당는 DOM에서 완전히 제거된다.
 
@@ -313,7 +313,7 @@ watch는 Vue에서 특정 데이터의 변화를 감시하는 속성다.<br/>
 </html>
 ```
 
-## v-show
+## V-Show
 조건에 따라 요소의 표시를 제어한다.<br/>
 조건이 true일 경우 요소는 DOM에 나타내고, 조건이 false일 경우 "display: none" 스타일이 적용되어 요소가 숨겨지지만 DOM에는 여전히 존재한다.
 
@@ -363,7 +363,7 @@ watch는 Vue에서 특정 데이터의 변화를 감시하는 속성다.<br/>
 </html>
 ```
 
-## v-for
+## V-For
 리스트나 객체의 항목을 기반으로 요소나 컴포넌트를 반복적으로 렌더링한다.
 
 ```java
@@ -438,7 +438,7 @@ watch는 Vue에서 특정 데이터의 변화를 감시하는 속성다.<br/>
 </html>
 ```
 
-## component
+## Component
 리스트나 객체의 항목을 기반으로 요소나 컴포넌트를 반복적으로 렌더링한다.
 
 ```java
@@ -953,7 +953,6 @@ export default {
 </style>
 ```
 
-
 ## Emit
 $emit은 Vue 인스턴스에서 사용자 정의 이벤트를 발생시키는 메서드이다. <br/>
 주로 자식 컴포넌트에서 부모 컴포넌트에게 통보하기 위해 사용된다.(Props를 자식 컴포넌트에서 수정할 수 없으므로) <br/>
@@ -1009,3 +1008,282 @@ export default {
 </script>
 ```
 
+## Vuex
+Vuex는 Vue.js 애플리케이션의 상태 관리 패턴과 라이브러리이다. <br/>
+중앙 집중식 저장소 역할을 하며, 컴포넌트 간의 공유된 상태 정보를 관리하는 데 사용된다.<br/>
+컴포넌트간 과도한 Props Drilling을 방지해주고, 상태값을 관리하기에 용이하게 해준다.
+
+Vuex의 구성성요소는 크게 4가지로 나뉘는데, 
+<br/>
+1. state:
+* 애플리케이션의 중앙 집중식 저장소로, 컴포넌트 간 공유하는 데이터를 뜻한다.
+
+2. actions:
+* 비동기 연산을 포함한 메서드로, 컴포넌트에서 dispatch 될 수 있다.
+* 주로 외부 API 호출 또는 복잡한 연산 후 mutations를 호출(commit)하여 state를 변경한다.
+
+3. mutations:
+* state를 변경하는 메서드로, 동기적으로 동작한다. state를 직접적으로 변경할 때 사용된다.
+
+4. getters:
+* state에서 파생된 값을 반환하는 메서드로, 계산된 속성 같은 역할을 한다.
+* 여러 컴포넌트에서 동일한 데이터 변환 로직을 사용할 때 유용하다.
+
+```java
+<!-- todo stroe -->
+
+export default {
+    namespaced: true, //true로 설정해야 vuex mapState,mapActions를 사용할때 모듈 namespace를 활용할수 있음음
+    state: {
+        todos: [
+            { id: 1, text: 'todo1', checked: false},
+            { id: 2, text: 'todo2', checked: false},
+        ],
+
+    },
+    mutations: {
+        //state, payload 가 인자
+        ADD_TODO(state, value) {
+            state.todos.push({
+                id: Math.random(),
+                text: value,
+                checked: false
+            });
+        },
+        TOGGLE_TODO(state, {id, checked}) {
+            const index = state.todos.findIndex(todo => {
+                return todo.id === id;
+            });
+            state.todos[index].checked = checked;
+        },
+        DELETE_TODO(state, todoId) {
+            const index = state.todos.findIndex(todo => {
+                return todo.id === todoId;
+            });
+            state.todos.splice(index, 1);
+        }
+    },
+    actions: {
+        //(context,value)
+        //context안에는 commit,dispatch등이 들어있음
+        addTodo({ commit }, value) {
+            //비동기 작업이 끝나는시점에 commit을 수행(실제론 api 통신코드가 적힘)
+            setTimeout(function () {
+                commit('ADD_TODO', value);
+            }, 500);
+        },
+        toggleTodo({ commit }, payload) {
+            setTimeout(function () {
+                commit('TOGGLE_TODO', payload);
+            }, 500);
+        },
+        deleteTodo({ commit }, todoId) {
+            setTimeout(function () {
+                commit('DELETE_TODO', todoId);
+            }, 500);
+        },
+    },
+    //getters: 컴포넌트의 computed와 비슷함
+    getters: {
+        numberOfCompletedTodo: state => {
+            return state.todos.filter(todo => todo.checked).length;
+        }
+    }
+}
+```
+
+```java
+
+<template>
+    <input
+        v-model="todoText"
+        type="text"
+        class="w-100 p-2"
+        placeholder="Type todo"
+        @keyup.enter="addTodo"
+    >
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            todoText: '',
+        }
+    },
+    methods: {
+        addTodo(e) {
+            // this.$store.commit('ADD_TODO', e.target.value) -> 바로 commit -> mutation
+            // 보통 비동기작업을 수행할때 dispatch를 통해 action을 일으킴
+            // distpatch(type,payload)
+            this.$store.dispatch('todo/addTodo', e.target.value); //distpatch를 통해 action -> commit-> mutation
+            this.todoText = '';
+            // this.$emit('add-todo', e.target.value);
+        }
+    }
+}
+</script>
+```
+```java
+<template>
+    <div>
+        Completed Todo: {{ numberOfCompletedTodo }}
+    </div>
+</template>
+
+<script>
+export default {
+    computed: {
+        numberOfCompletedTodo() {
+            return this.$store.getters['todo/numberOfCompletedTodo'];
+        }
+    }
+}
+</script>
+```
+
+```java
+
+<template>
+    <div>
+        <Todo
+            v-for="todo in todos"
+            :key="todo.id"
+            :todo="todo"
+        />
+    </div>
+</template>
+
+<script>
+import Todo from '@/components/Todo.vue';
+export default {
+    components: {
+        Todo
+    },
+    computed: {
+        todos() {
+            return this.$store.state.todo.todos;
+        }
+    },
+}
+</script>
+```
+
+## Vuex Helper
+helper는 Vuex 저장소의 여러 기능을 컴포넌트에서 쉽게 바인딩하거나 사용할 수 있게 도와주는 유틸리티 함수이다.<br/> 
+이러한 helper를 사용하면 코드의 중복을 줄이고 가독성을 향상시킬 수 있다.
+
+helper의 종료 4가지로 나뉘는데, 
+<br/>
+1. mapState:
+* 저장소의 state를 컴포넌트의 computed 속성으로 매핑한다.
+
+2. mapMutations:
+* 저장소의 mutations를 컴포넌트의 methods로 매핑한다.
+
+3. mapActions:
+* 저장소의 actions를 컴포넌트의 methods로 매핑한다.
+
+4. mapGetters:
+*  저장소의 getters를 컴포넌트의 computed 속성으로 매핑한.
+
+```java
+<!-- 예시 1번 -->
+<template>
+  <div>
+    <p>{{ count }}</p> <!-- from mapState -->
+    <button @click="increment">Increment</button> <!-- from mapMutations -->
+    <button @click="incrementAsync">Increment After 1s</button> <!-- from mapActions -->
+    <p>{{ doubleCount }}</p> <!-- from mapGetters -->
+  </div>
+</template>
+
+<script>
+import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
+
+export default {
+  computed: {
+    ...mapState(['count']),
+    ...mapGetters(['doubleCount'])
+  },
+  methods: {
+    ...mapMutations(['increment']),
+    ...mapActions(['incrementAsync'])
+  }
+}
+</script>
+```
+
+```java
+<!-- 예시 2번 -->
+<template>
+    <div>
+        <br/>
+        <h1>User List</h1>
+        <!-- v-for는 항상 key를 넣어줘야함 -->
+        <div v-for="user in users" :key="user.id">
+            <li>{{ user.name }}</li>
+        </div>
+    </div>
+</template>
+
+<script>
+    import { mapState, mapActions } from 'vuex';
+    export default {
+        created() {
+            this.getUsers();
+        },
+        computed: {
+            //map helper
+            //mapState,mapGetters는 computed에 넣어주고, mapMutations,mapActions는 method에 넣어줘야함
+            
+            ...mapState('user', ['users']) //모둘명,[state]
+            // ...mapState('user', {
+            //     users: state => state.users
+            // })
+            // ...mapState({
+            //     users: state => state.user.users
+            // })
+
+            // ...mapState(['todos','users'])
+            // ...mapState({people: 'users'}) //다른 이름으로 쓰고싶을때
+            // users() {
+            //     return this.$store.state.users;
+            // },
+            // todos() {
+            //     return this.$store.state.todos;
+            // }
+        },
+        methods: {
+            //map helper
+            ...mapActions('user', ['getUsers']) //모듈명,[action]
+            // getUsers() {
+            //     this.$store.dispatch('getUsers');
+            // }
+        }
+    }
+</script>
+
+import axios from "axios";
+
+export default {
+    namespaced: true,
+    state: {
+        users: []
+    },
+
+    mutations: {
+        SET_USERS(state, users) {
+            state.users = users;
+        },
+    },
+
+    actions: {
+        getUsers({ commit }) {
+            axios.get('https://jsonplaceholder.typicode.com/users').then(res => {
+                commit('SET_USERS', res.data);
+            });
+        },
+    }
+}
+```
