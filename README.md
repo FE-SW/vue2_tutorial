@@ -160,6 +160,75 @@ v-model는 Vue의 양방향 데이터 바인딩 디렉티브이다.<br/>
 </html>
 ```
 
+## V-On
+v-on 디렉티브는 이벤트 리스너를 요소에 추가하는 데 사용된다.<br/> 
+주로 DOM 이벤트를 감지하고 이에 반응하기 위해 사용된다.<br/> 
+
+v-on 다음에 콜론 (:)과 함께 이벤트 이름이 지정된다.<br/>
+또한, v-on의 짧은 문법으로 @를 사용할 수 있다. <br/>
+예를 들면, v-on:click는 @click으로도 표현될 수 있습니다.
+
+```java
+<template>
+  <button v-on:click="sayHello">Click me</button>
+</template>
+
+<script>
+export default {
+  methods: {
+    sayHello() {
+      console.log('Hello!');
+    }
+  }
+}
+</script>
+```
+
+```java
+<template>
+  <div class="mb-2 d-flex">
+      <div>
+        <input type="checkbox" :checked="todo.checked" @change="toggleCheckbox">
+      </div>
+        
+        <span 
+            class="ml-3 flex-grow-1"
+            :class="todo.checked ? 'text-muted' : ''"
+            :style="todo.checked ? 'text-decoration: line-through': ''"
+        >
+            {{ todo.text }}
+        </span>
+        <button 
+            class="btn btn-danger btn-sm"
+            @click="clickDelete"
+        >Delete</button>
+    </div>
+</template>
+
+
+<script>
+export default {
+    props: {
+        todo: {
+            type: Object,
+            required: true
+        }
+    },
+    methods: {
+        toggleCheckbox(e) {
+            this.$emit('toggle-checkbox', {
+                id: this.todo.id,
+                checked: e.target.checked
+            })
+        },
+        clickDelete() {
+            this.$emit('click-delete', this.todo.id);
+        }
+    }
+}
+</script>
+```
+
 ## Computed
 computed는 Vue의 반응형 연산 속성이다.<br> 
 기본 데이터를 기반으로 어떤 계산된 결과를 반환하며, 의존하는 상태가 변경될 때만 재계산된다.<br> 
@@ -766,6 +835,11 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/user/:id',
+    name: 'user',
+    component: UserView
+  },
+  {
     path: '/about',
     name: 'about',
     // route level code-splitting
@@ -796,30 +870,48 @@ export default router
     <router-view/>
   </div>
 </template>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
 ```
+
+## Router로 값 전달하기
+
+* Query Parameters:
+```java
+<-- 값을 전달할때 -->
+this.$router.push({ path: 'user', query: { id: '123' } }); //방법1
+
+<router-link :to="{ path: 'user', query: { id: '123' } }">User</router-link> //방법2
+
+
+<-- 값을 받을때 -->
+let userId = this.$route.query.id; // '123'
+```
+
+* Params:
+```java
+<-- 값을 전달할때 -->
+{ path: '/user/:id', component: User } //전제조건,라우터 정의부분에서 설정
+
+this.$router.push({ name: 'user', params: { id: '123' } }); //방법1
+
+<router-link :to="{ name: 'user', params: { id: '123' } }">User</router-link> //방법2
+
+
+<-- 값을 받을때 -->
+let userId = this.$route.params.id; // '123'
+```
+
+* State (Vue Router v4 이후):
+```java
+<-- 값을 전달할때 -->
+this.$router.push({ path: '/user', state: { userId: '123' } });
+
+<router-link :to="{ path: '/user', state: { userId: '123' } }">User</router-link>
+
+
+<-- 값을 받을때 -->
+let userId = this.$route.state.userId; // '123'
+```
+
 
 ## Slot
  slot은 컴포넌트의 재사용성을 높이기 위한 중요한 기능이다.<br/>
