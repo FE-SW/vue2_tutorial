@@ -509,7 +509,7 @@ watch는 Vue에서 특정 데이터의 변화를 감시하는 속성이다.<br/>
 ```
 
 ## Component
-: Vue.js에서 재사용 가능한 UI 구성 요소이다.<br/>
+Vue.js에서 재사용 가능한 UI 구성 요소이다.<br/>
 컴포넌트는 독립적인 뷰 단위로 분리되어, 각각의 데이터, 메서드, 그리고 생명주기 훅을 포함할 수 있다.<br/> 
 이를 통해 복잡한 애플리케이션을 작은, 관리하기 쉬운 단위로 나눌 수 있다.
 
@@ -658,6 +658,82 @@ export default {
   }
 }
 </script>
+```
+
+## this.$root / this.$parent
+1.this.$root: <br/>
+* 현재 Vue 컴포넌트의 루트 컴포넌트를 가리킨다.
+
+2.this.$parent: <br/>
+* 현재 Vue 컴포넌트의 부모 컴포넌트를 가리킨다.
+
+<br/>
+
+뷰에서는 리액트와 다르게 최상위컴포넌트,부모컴포넌트의 데이터를 Props로 넘겨주지않아도 직접적으로 접근하는 문법을 지원한다.
+```java
+<!-- 부모 컴포넌트 -->
+Vue.component('parent', {
+  data() {
+    return {
+      parentData: 'Hello from Parent'
+    }
+  },
+  mounted() {
+    console.log(this.$root.$data); // { parentData: 'Hello from Parent' } - Parent 컴포넌트는 루트 인스턴스이기 때문에 자신의 데이터를 출력
+  },
+  template: `
+    <div>
+      <child></child>
+    </div>
+  `
+});
+
+<!-- 자식 컴포넌트 -->
+Vue.component('child', {
+  data() {
+    return {
+      childData: 'Hello from Child'
+    }
+  },
+  mounted() {
+    console.log(this.$root.$data); // { parentData: 'Hello from Parent' } - 루트 컴포넌트인 Parent의 데이터를 출력
+    console.log(this.$parent.$data); // { parentData: 'Hello from Parent' } - 직접적인 부모인 Parent의 데이터를 출력
+  },
+  template: `
+    <div>
+      <grandchild></grandchild>
+    </div>
+  `
+});
+
+<!-- 손주 컴포넌트 -->
+Vue.component('grandchild', {
+  data() {
+    return {
+      grandchildData: 'Hello from Grandchild'
+    }
+  },
+  mounted() {
+    console.log(this.$root.$data); // { parentData: 'Hello from Parent' } - 루트 컴포넌트인 Parent의 데이터를 출력
+    console.log(this.$parent.$data); // { childData: 'Hello from Child' } - 직접적인 부모인 Child의 데이터를 출력
+  },
+  template: `
+    <div>
+      Grandchild Component
+    </div>
+  `
+});
+
+// 루트 인스턴스
+new Vue({
+  el: '#app',
+  template: `
+    <div>
+      <parent></parent>
+    </div>
+  `
+});
+
 ```
 
 ## Ref
