@@ -829,6 +829,60 @@ export default {
 </script>
 ```
 
+## Event Bus
+ Vue에서 사용하는 간단한 전역 이벤트 관리 시스템이다. 어플리케이션에서 컴포넌트 간의 데이터나 이벤트를 전달하기 위해 사용한다. <br/> 
+ Vue의 인스턴스를 이용하여 생성되며, 여러 컴포넌트 간에 데이터나 이벤트를 전달하는 중개자 역할을 한다. <br/>
+
+1.EventBus.$on
+* 이벤트 리스너를 등록하는 메서드.
+* 첫 번째 인자는 이벤트 이름이고, 두 번째 인자는 해당 이벤트가 발생했을 때 호출되는 콜백 함수
+
+2.EventBus.$emit:
+* 이벤트를 발생시키는 메서드.
+* 첫 번째 인자는 이벤트 이름이고, 이후의 인자들은 해당 이벤트와 함께 전달될 파라미터
+
+* 2.EventBus.$off:
+* 등록된 이벤트 리스너 제거하는 메서드.
+* 첫 번째 인자는 이벤트 이름이고, 이후의 인자들은 해당 이벤트와 함께 전달될 파라미터
+
+```java
+<-- EventBus 생성 -->
+import Vue from 'vue';
+export const EventBus = new Vue();
+```
+
+```java
+<-- 이벤트 핸들러 등록, 제거 -->
+import { EventBus } from '.EventBus';
+
+export default {
+  created() {
+    EventBus.$on('my-event', this.handleEvent); //이벤트 리스너 등록
+  },
+  beforeDestroy() {
+    EventBus.$off('my-event', this.handleEvent); // 등록한 이벤트 리스너 제거
+  },
+  methods: {
+    handleEvent(payload) {
+      console.log("Event received with payload:", payload);
+    }
+  }
+}
+```
+
+```java
+<-- 이벤트 호출 -->
+import { EventBus } from './EventBus';
+
+export default {
+  methods: {
+    sendEvent() {
+      EventBus.$emit('my-event', { data: 'Some data' });
+    }
+  }
+}
+```
+
 ## Life Cycle Hook
 뷰의 라이프사이클 훅은 컴포넌트의 다양한 단계에서 실행되는 사용자 정의 로직을 추가하기 위한 메소드들이다.<br/> 
 이 훅들은 컴포넌트의 생성부터 소멸까지의 단계에서 특정 타이밍에 코드를 실행할 수 있게 해준다.
