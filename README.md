@@ -736,6 +736,58 @@ new Vue({
 
 ```
 
+## this.$set
+Vue.js는 데이터의 반응형 시스템을 통해 데이터 변경을 감지하고 해당 변경사항에 따라 DOM을 업데이트 한다. <br/>
+그러나 Vue는 객체의 속성이나 배열의 인덱스에 직접적인 변경을 감지할 수 없다.(Vue의 반응형 시스템은 데이터 객체의 초기 속성을 추적하기 떄문에)<br/> 
+
+<br/>
+
+this.$set 메서드는 이런 제한을 해결하기 위한 유틸리티이다. <br/> 
+이 메서드를 사용하면 객체의 속성이나 배열의 항목을 안전하게 변경하고 해당 변경사항이 반응형으로 감지될 수 있도록 해다.
+
+<br/>
+
+```java
+<template>
+  <div>
+    <child :parentData="parentData" @updateData="handleUpdate"></child>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      parentData: {
+        items: [1, 2, 3]
+      }
+    };
+  },
+  methods: {
+    handleUpdate(payload) {
+      this.$set(this.parentData.items, payload.index, payload.value);
+    }
+  },
+  components: {
+    child: {
+      props: ['parentData'],
+      methods: {
+        updateData() {
+          this.$emit('updateData', { index: 1, value: 5 });
+        }
+      },
+      template: `
+        <div>
+          <button @click="updateData">Update Parent Data</button>
+        </div>
+      `
+    }
+  }
+};
+</script>
+
+```
+
 ## Ref
 Vue에서 특정 DOM 엘리먼트나 컴포넌트 인스턴스에 직접적인 참조를 생성하는 데 사용되는 속성이다.<br/> 
 이를 통해 특정 엘리먼트나 컴포넌트에 프로그래밍적으로 접근할 수 있게 된다.
