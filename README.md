@@ -5,7 +5,7 @@ Vue 인스턴스는 Vue.js에서 생성된 객체이다.<br/>
 인스턴스는 사용자 정의 데이터, 메소드, 라이프사이클 훅 등 다양한 기능을 갖는다.<br/>
 이 인스턴스를 통해 DOM과 데이터를 반응적으로 연결하며, Vue 애플리케이션의 기본 구성 단위를 형성한다.
 
-```java
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +36,7 @@ Vue 인스턴스는 Vue.js에서 생성된 객체이다.<br/>
 methods 속성을 통해 인스턴스에 함수를 추가할 수 있다.<br/> 
 이 메소드들은 인스턴스의 다른 속성과 상호 작용하거나, html 태그의 이벤트 리스너로 사용될 수 있다
 
-```java
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,7 +78,7 @@ methods 속성을 통해 인스턴스에 함수를 추가할 수 있다.<br/>
 v-bind는 Vue의 디렉티브 중 하나로, HTML 속성을 Vue 인스턴스의 데이터와 바인딩하기 위해 사용된다.<br/> 
 이를 통해 동적으로 HTML 요소의 속성값을 지정할 수 있다
 
-```java
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,7 +119,7 @@ v-model는 Vue의 양방향 데이터 바인딩 디렉티브이다.<br/>
 주로 입력 양식 요소에 사용되며, 사용자의 입력과 Vue 인스턴스의 데이터를 자동으로 서로 연결하고 동기화한다.<br/> 
 즉, 사용자의 입력으로 값이 변경되면 Vue 인스턴스의 데이터도 자동으로 업데이트되고, 반대로 데이터의 변경이 입력 필드에도 반영된다.
 
-```java
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -168,7 +168,7 @@ v-on 다음에 콜론 (:)과 함께 이벤트 이름이 지정된다.<br/>
 또한, v-on의 짧은 문법으로 @를 사용할 수 있다. <br/>
 예를 들면, v-on:click는 @click으로도 표현될 수 있습니다.
 
-```java
+```html
 <template>
   <button v-on:click="sayHello">Click me</button>
 </template>
@@ -184,7 +184,7 @@ export default {
 </script>
 ```
 
-```java
+```html
 <template>
   <div class="mb-2 d-flex">
       <div>
@@ -234,7 +234,7 @@ computed는 Vue의 반응형 연산 속성이다.<br>
 기본 데이터를 기반으로 어떤 계산된 결과를 반환하며, 의존하는 상태가 변경될 때만 재계산된다.<br> 
 이를 통해 효율적으로 상태 변화에 따른 연산을 처리하고, 그 결과를 캐시하여 성능을 최적화할 수 있다.
 
-```java
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -280,7 +280,7 @@ computed는 Vue의 반응형 연산 속성이다.<br>
 watch는 Vue에서 특정 데이터의 변화를 감시하는 속성이다.<br/>
 데이터의 변화를 감지할 때마다 정의된 함수가 호출되어 복잡한 연산, 비동기 요청 또는 수행이 필요한 다른 작업들을 수행할 수 있다.
 
-```java
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -335,7 +335,7 @@ watch는 Vue에서 특정 데이터의 변화를 감시하는 속성이다.<br/>
 조건에 따라 요소를 렌더링 해주는 기능을 제공한다.<br/>
 조건이 true일 경우 요소는 DOM에 나타내고, 조건이 false일 경우 해당는 DOM에서 완전히 제거된다.
 
-```java
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -387,7 +387,7 @@ watch는 Vue에서 특정 데이터의 변화를 감시하는 속성이다.<br/>
 조건이 true일 경우 요소는 DOM에 나타내고,<br/> 
 조건이 false일 경우 "display: none" 스타일이 적용되어 요소가 숨겨지지만 DOM에는 여전히 존재한다.
 
-```java
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -436,7 +436,7 @@ watch는 Vue에서 특정 데이터의 변화를 감시하는 속성이다.<br/>
 ## V-For
 리스트나 객체의 항목을 기반으로 요소나 컴포넌트를 반복적으로 렌더링한다.
 
-```java
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -513,7 +513,7 @@ Vue.js에서 재사용 가능한 UI 구성 요소이다.<br/>
 컴포넌트는 독립적인 뷰 단위로 분리되어, 각각의 데이터, 메서드, 그리고 생명주기 훅을 포함할 수 있다.<br/> 
 이를 통해 복잡한 애플리케이션을 작은, 관리하기 쉬운 단위로 나눌 수 있다.
 
-```java
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -616,7 +616,7 @@ Vue.js에서 재사용 가능한 UI 구성 요소이다.<br/>
 props는 부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달하는 방식이다.<br/>
 props는 읽기 전용이므로 자식 컴포넌트에서는 수정할 수 없다.
 
-```java
+```javascript
 <!-- 부모 컴포넌트 -->
 <template>
   <ChildComponent :msg="parentMessage"/>
@@ -638,7 +638,7 @@ export default {
 </script>
 ```
 
-```java
+```javascript
 <!-- 자식 컴포넌트 -->
 <template>
   <div class="hello">
@@ -670,7 +670,7 @@ export default {
 <br/>
 
 뷰에서는 리액트와 다르게 최상위컴포넌트,부모컴포넌트의 데이터를 Props로 넘겨주지않아도 직접적으로 접근하는 문법을 지원한다.
-```java
+```javascript
 <!-- 부모 컴포넌트 -->
 Vue.component('parent', {
   data() {
@@ -747,7 +747,7 @@ this.$set 메서드는 이런 제한을 해결하기 위한 유틸리티이다. 
 
 <br/>
 
-```java
+```javascript
 <template>
   <div>
     <child :parentData="parentData" @updateData="handleUpdate"></child>
@@ -792,7 +792,7 @@ export default {
 Vue에서 특정 DOM 엘리먼트나 컴포넌트 인스턴스에 직접적인 참조를 생성하는 데 사용되는 속성이다.<br/> 
 이를 통해 특정 엘리먼트나 컴포넌트에 프로그래밍적으로 접근할 수 있게 된다.
 
-```java
+```javascript
 <-- DOM 엘리먼트에 ref 사용 -->
 <template>
   <input ref="myInput">
@@ -808,7 +808,7 @@ export default {
 </script>
 ```
 
-```java
+```javascript
 <-- 자식 컴포넌트 인스턴스에 ref 사용 -->
 <template>
   <child-component ref="myChild"></child-component>
@@ -845,13 +845,13 @@ export default {
 * 등록된 이벤트 리스너 제거하는 메서드.
 * 첫 번째 인자는 이벤트 이름이고, 이후의 인자들은 해당 이벤트와 함께 전달될 파라미터
 
-```java
+```javascript
 <-- EventBus 생성 -->
 import Vue from 'vue';
 export const EventBus = new Vue();
 ```
 
-```java
+```javascript
 <-- 이벤트 핸들러 등록, 제거 -->
 import { EventBus } from '.EventBus';
 
@@ -870,7 +870,7 @@ export default {
 }
 ```
 
-```java
+```javascript
 <-- 이벤트 호출 -->
 import { EventBus } from './EventBus';
 
@@ -926,7 +926,7 @@ export default {
 
 <br/>
 
-```java
+```javascript
 <template>
   <div>
     <h1>This is Home page</h1>
@@ -1003,7 +1003,7 @@ Vue.js의 공식 라우팅 라이브러리로,<br/>
 싱글 페이지 애플리케이션(SPA)의 페이지 전환 및 로직을 관리합니다.<br/> 
 URL에 따라 다른 컴포넌트를 클라이언트에서 동적으로 렌더링하며, 브라우저의 히스토리와의 통합을 제공한다.
 
-```java
+```javascript
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
@@ -1040,7 +1040,7 @@ const router = new VueRouter({
 export default router
 ```
 
-```java
+```javascript
 <template>
   <div id="app">
     <!-- router-link 태그로 route이동 -->
@@ -1057,7 +1057,7 @@ export default router
 ## Router로 값 전달하기
 
 * Query Parameters:
-```java
+```javascript
 <-- 값을 전달할때 -->
 this.$router.push({ path: 'user', query: { id: '123' } }); //방법1
 
@@ -1069,7 +1069,7 @@ let userId = this.$route.query.id; // '123'
 ```
 
 * Params:
-```java
+```javascript
 <-- 값을 전달할때 -->
 { path: '/user/:id', component: User } //전제조건,라우터 정의부분에서 설정
 
@@ -1083,7 +1083,7 @@ let userId = this.$route.params.id; // '123'
 ```
 
 * State (Vue Router v4 이후):
-```java
+```javascript
 <-- 값을 전달할때 -->
 this.$router.push({ path: '/user', state: { userId: '123' } });
 
@@ -1105,7 +1105,7 @@ let userId = this.$route.state.userId; // '123'
 1.기본 슬롯: 
 * 자식 컴포넌트 내에 <slot></slot> 태그를 넣으면 부모 컴포넌트에서 해당 자식 컴포넌트 태그 내부에 넣은 내용이 해당 위치에 삽입한다.
 
-```java
+```javascript
 <!-- 부모 컴포넌트에서의 사용 -->
 <child-component>부모에서 전달한 내용</child-component>
 
@@ -1120,7 +1120,7 @@ let userId = this.$route.state.userId; // '123'
 2.슬롯의 기본 컨텐츠: 
 * 슬롯에 기본 컨텐츠를 제공할 수 있다. 부모 컴포넌트에서 해당 슬롯에 컨텐츠를 제공하지 않았을 때만 기본 컨텐츠가 표시다.
 
-```java
+```javascript
 <!-- 부모 컴포넌트에서의 사용 -->
 <child-component/>
 
@@ -1135,7 +1135,7 @@ let userId = this.$route.state.userId; // '123'
 3.명명된 슬롯: 
 * 여러 개의 슬롯을 자식 컴포넌트에 지정할 수 있다. 각각의 슬롯에는 name 속성을 사용하여 고유한 이름을 부여다
 
-```java
+```javascript
 <!-- 부모 컴포넌트에서의 사용 -->
 <child-component>
   <template v-slot:header>헤더 내용</template>
@@ -1162,7 +1162,7 @@ let userId = this.$route.state.userId; // '123'
 
 4.명명된 슬롯 + 슬롯 속성 (또는 슬롯 props)을 사용하여 부모 컴포넌트에서 자식 컴포넌트로 데이터를 전달하는 방식
 
-```java
+```javascript
 동작과정을 설명하면,
 
 1.명명된 슬롯: <slot name="header" :SampleData="SampleData"></slot>에서 name="header" 부분은 명명된 슬롯을 나타냄
@@ -1203,8 +1203,7 @@ export default {
 </script>
 ```
 
-```java
-
+```javascript
 <template>
     <div>
         <p>header</p>
@@ -1256,7 +1255,7 @@ $emit은 Vue 인스턴스에서 사용자 정의 이벤트를 발생시키는 �
 이를 통해 부모 컴포넌트에게 데이터 변경 요청이나 특정 액션의 필요성을 알릴 수 있다.
 <br/>
 
-```java
+```javascript
 <template>
   <child-component :message="parentMessage" @updateMessage="updateParentMessage"></child-component>
 </template>
@@ -1282,7 +1281,7 @@ export default {
 </script>
 ```
 
-```java
+```javascript
 <template>
   <div>
     <p>{{ message }}</p>
@@ -1326,7 +1325,7 @@ Vuex의 구성성요소는 크게 4가지로 나뉘는데,
 * state에서 파생된 값을 반환하는 메서드로, 계산된 속성 같은 역할을 한다.
 * 여러 컴포넌트에서 동일한 데이터 변환 로직을 사용할 때 유용하다.
 
-```java
+```javascript
 <!-- todo stroe -->
 
 export default {
@@ -1389,8 +1388,7 @@ export default {
 }
 ```
 
-```java
-
+```javascript
 <template>
     <input
         v-model="todoText"
@@ -1421,7 +1419,7 @@ export default {
 }
 </script>
 ```
-```java
+```javascript
 <template>
     <div>
         Completed Todo: {{ numberOfCompletedTodo }}
@@ -1439,8 +1437,7 @@ export default {
 </script>
 ```
 
-```java
-
+```javascript
 <template>
     <div>
         <Todo
@@ -1484,7 +1481,7 @@ helper의 종료 4가지로 나뉘는데,
 4. mapGetters:
 *  저장소의 getters를 컴포넌트의 computed 속성으로 매핑한다.
 
-```java
+```javascript
 <!-- 예시 1번 -->
 <template>
   <div>
@@ -1511,7 +1508,7 @@ export default {
 </script>
 ```
 
-```java
+```javascript
 <!-- 예시 2번 -->
 <template>
     <div>
